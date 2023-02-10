@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>ChatGPT Input/Output</title>
+  </head>
+  <body>
+    <h1>ChatGPT Input/Output</h1>
+    <form method="post">
+      <label for="input_text">Enter Your Input:</label>
+      <textarea name="input_text" rows="1" cols="100" style="width: 50%"></textarea><br><br>
+      <input type="submit" value="Add Input">
+      <input type="submit" value="Submit" name="submit">
+    </form>
+    <br>
+    <h2>Current Prompt:</h2>
+    <pre>{{ prompt }}</pre>
+    {% for line in prompt.splitlines() %}
+      {% if loop.index > 1 %}
+        <form method="post">
+          <input type="hidden" name="remove" value="{{ loop.index }}">
+          <input type="submit" value="Remove {{ line }}">
+        </form>
+      {% endif %}
+    {% endfor %}
+    <br>
+    {% if result %}
+      <h2>Response:</h2>
+      <pre>{{ result }}</pre>
+    {% endif %}
+  </body>
+</html>
